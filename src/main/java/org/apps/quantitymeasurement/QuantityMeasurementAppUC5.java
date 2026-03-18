@@ -1,4 +1,4 @@
-package apps.quantitymeasurement;
+package org.apps.quantitymeasurement;
 
 public class QuantityMeasurementAppUC5 {
 

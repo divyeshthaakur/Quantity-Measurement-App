@@ -1,6 +1,6 @@
-package apps.quantitymeasurement;
+package org.apps.quantitymeasurement;
 
-public class LengthUC4 {
+public class Length {
 
     private double value;
     private LengthUnit unit;
@@ -8,9 +8,7 @@ public class LengthUC4 {
     public enum LengthUnit {
 
         FEET(12.0),
-        INCHES(1.0),
-        YARDS(36.0),
-        CENTIMETERS(0.393701);
+        INCHES(1.0);
 
         private final double conversionFactor;
 
@@ -24,7 +22,8 @@ public class LengthUC4 {
     }
 
 
-    public LengthUC4(double value, LengthUnit unit) {
+    // constructor
+    public Length(double value, LengthUnit unit) {
 
         if (unit == null) {
             throw new IllegalArgumentException("Unit cannot be null");
@@ -35,15 +34,15 @@ public class LengthUC4 {
     }
 
 
+    // convert to base unit (inches)
     private double convertToBaseUnit() {
 
-        double base = value * unit.getConversionFactor();
-
-        return Math.round(base * 100.0) / 100.0;
+        return value * unit.getConversionFactor();
     }
 
 
-    public boolean compare(LengthUC4 thatLength) {
+    // compare two Length objects
+    public boolean compare(Length thatLength) {
 
         if (thatLength == null) return false;
 
@@ -63,8 +62,17 @@ public class LengthUC4 {
 
         if (getClass() != o.getClass()) return false;
 
-        LengthUC4 thatLength = (LengthUC4) o;
+        Length thatLength = (Length) o;
 
         return compare(thatLength);
+    }
+
+
+    public static void main(String[] args) {
+
+        Length length1 = new Length(1.0, LengthUnit.FEET);
+        Length length2 = new Length(12.0, LengthUnit.INCHES);
+
+        System.out.println(length1.equals(length2));
     }
 }
